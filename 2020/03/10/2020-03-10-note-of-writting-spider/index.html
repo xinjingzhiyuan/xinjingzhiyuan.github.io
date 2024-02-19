@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Hello World | Hexo</title>
+  <title>note of writting spider | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="随机请求头的使用在爬取网站内容时，如何同一个ip地址使用同一个请求头向服务器发出大量请求，可能会被服务器识别为恶意爬虫而封ip（个人理解，不一定十分准确）。为了避免这种现象发生，可以采用以下方法：1.随机使用请求头；2.使用ip代理池。当然如果两种方法同时使用，效果更佳。 废话不说，直接上代码。 123456789101112131415161718192021222324252627282930">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2024/02/19/hello-world/index.html">
+<meta property="og:title" content="note of writting spider">
+<meta property="og:url" content="http://example.com/2020/03/10/2020-03-10-note-of-writting-spider/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="随机请求头的使用在爬取网站内容时，如何同一个ip地址使用同一个请求头向服务器发出大量请求，可能会被服务器识别为恶意爬虫而封ip（个人理解，不一定十分准确）。为了避免这种现象发生，可以采用以下方法：1.随机使用请求头；2.使用ip代理池。当然如果两种方法同时使用，效果更佳。 废话不说，直接上代码。 123456789101112131415161718192021222324252627282930">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-19T06:41:48.256Z">
-<meta property="article:modified_time" content="2024-02-19T06:41:48.256Z">
+<meta property="article:published_time" content="2020-03-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-10T11:39:55.386Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="spider">
+<meta property="article:tag" content="random headers">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -71,12 +73,16 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-2020-03-10-note-of-writting-spider" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/02/19/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-02-19T06:41:48.256Z" itemprop="datePublished">2024-02-19</time>
+    <a href="/2020/03/10/2020-03-10-note-of-writting-spider/" class="article-date">
+  <time class="dt-published" datetime="2020-03-09T16:00:00.000Z" itemprop="datePublished">2020-03-10</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -85,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Hello World
+      note of writting spider
     </h1>
   
 
@@ -93,37 +99,41 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="随机请求头的使用"><a href="#随机请求头的使用" class="headerlink" title="随机请求头的使用"></a>随机请求头的使用</h1><p>在爬取网站内容时，如何同一个ip地址使用同一个请求头向服务器发出大量请求，可能会被服务器识别为恶意爬虫而封ip（个人理解，不一定十分准确）。为了避免这种现象发生，可以采用以下方法：1.随机使用请求头；2.使用ip代理池。当然如果两种方法同时使用，效果更佳。</p>
+<p>废话不说，直接上代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line">def get_headers():</span><br><span class="line">    USER_AGENTS = [</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;,</span><br><span class="line">    &#x27;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&#x27;,</span><br><span class="line">    &#x27;Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon 2.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Avant Browser&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1&#x27;,</span><br><span class="line">    ]</span><br><span class="line">    User_Agent = random.choice(USER_AGENTS)</span><br><span class="line">    headers = &#123;</span><br><span class="line">    &#x27;Accept&#x27;: &#x27;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#x27;,</span><br><span class="line">    &#x27;Accept-Language&#x27;: &#x27;en&#x27;,</span><br><span class="line">    &#x27;User-Agent&#x27;: User_Agent</span><br><span class="line">    &#125;</span><br><span class="line">    return headers</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>仅作为个人学习记录之用，写的相当随意。</p>
+<hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/19/hello-world/" data-id="clsskl3eq0000lkz4f8decj7q" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2020/03/10/2020-03-10-note-of-writting-spider/" data-id="clssne6ww0006xwz46midclg8" data-title="note of writting spider" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/random-headers/" rel="tag">random headers</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spider/" rel="tag">spider</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
+    <a href="/2020/03/11/2020-03-11-note-of-learning-git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          note of learning git
+        
+      </div>
+    </a>
   
-    <a href="/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2020/03/10/2020-03-10-note-of-learning-xpath/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">在安卓手机上部署服务器并设置frp内网穿透</div>
+      <div class="article-nav-title">note of learning xpath</div>
     </a>
   
 </nav>

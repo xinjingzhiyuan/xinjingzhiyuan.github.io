@@ -120,25 +120,927 @@
 
 
   
+    <article id="post-2020-03-26-在安卓手机上部署服务器并设置frp内网穿透" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time class="dt-published" datetime="2020-03-25T16:00:00.000Z" itemprop="datePublished">2020-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BA%9F%E6%97%A7%E6%89%8B%E6%9C%BA%E5%88%A9%E7%94%A8/">废旧手机利用</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">在安卓手机上部署服务器并设置frp内网穿透</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="在安卓手机上部署服务器并设置frp内网穿透"><a href="#在安卓手机上部署服务器并设置frp内网穿透" class="headerlink" title="在安卓手机上部署服务器并设置frp内网穿透"></a>在安卓手机上部署服务器并设置frp内网穿透</h1><p>在上一篇博客《Android手机&#x2F;平板安装使用Linux Deploy安装CentOS》里记录了在安卓手机里安装CentOS的过程，当linux系统已经安装完成后，我们就可以继续往下折腾了。有了centos系统，我的想法是在平板里搭建一个nginx服务器，将《hexo+git+nodejs+nginx+使用centos7的VPS搭建博客》这篇文章里的博客同时也部署到平板里，这样在本地（win10计算机）里写完文章后，使用<code>hexo g</code>和<code>hexo d</code>两个命令就可以在两个服务器上同步更新博客了。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>一个域名，并设置好解析；</li>
+<li>安装好linux系统的安卓手机&#x2F;平板；</li>
+</ol>
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><p>在linux deploy软件里安装的linux系统安装nginx时方法有所不同，不过网上的教程也是一搜一大把，这里就不详细介绍了。主要记录一些我在操作过程中遇到的坑：</p>
+<ol>
+<li><p>编译安装nginx时，需要首先安装gcc, net-tools, gcc-c++, cmake. 以上这些可以直接使用<code>yum install</code>命令来安装，安装完成后，在命令行终端使用<code>make</code>命令不提示没有此命令，就可以编译安装pcre, zlib, openssl了，最后再安装nginx；</p>
+</li>
+<li><p>安装完成后，需要进行配置。这里由于我想搭建博客，按照《hexo+git+nodejs+nginx+使用centos7的VPS搭建博客》这篇文章里步骤，在编辑好<code>hexo.conf</code>配置文件后，需要将<code>hexo.conf</code>这个配置文件加入到nginx的配置文件里，这样启动nginx时才会加载<code>hexo.conf</code>中的配置。例如：我的nginx是安装在<code>/usr/local/nginx</code>这个文件夹里，<code>hexo.conf</code>文件是放在<code>/usr/local/nginx/conf.d</code>这个文件夹里。那么在<code>/usr/local/nginx/conf/nginx.conf</code>这个文件的最后（倒数第二行）需要加入这样一句：<code>include /usr/local/nginx/conf.d/hexo.conf</code></p>
+</li>
+</ol>
+<h2 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h2><p>在前面《hexo+git+nodejs+nginx+使用centos7的VPS搭建博客》这篇文章里，我曾经详细介绍了在centos7的vps上如何搭建搭建博客。这次在安卓平板上基本上也是按照同样的流程把上面那篇文章里在VPS上的操作再做一遍就可以了。需要注意的是在安卓系统里安装的linux系统在安装nginx的方法有所不同，需要编译安装，教程在网上一搜一大把，就不单独记录了。</p>
+<p>博客部署完成后，在本机（win10电脑）的<code>hexo</code>文件夹下的<code>_config.yml</code>文件最后<code>deploy</code>那里，添加一行：<code>s2: git@192.168.46.109:hexo.git,master</code>其中的IP地址为linux deploy软件里centos系统开启时上面显示的IP地址。</p>
+<p>然后在本机（win10电脑）里使用<code>hexo g</code>和<code>hexo d</code>命令，将博客文件推送到平板电脑的nginx服务器里。使用平板电脑里的浏览器，输入地址：<code>127.0.0.1</code>，正常情况下就可以看到博客了。</p>
+<h2 id="部署frp"><a href="#部署frp" class="headerlink" title="部署frp"></a>部署frp</h2><p>在完成了上面的工作后，有一个问题就是平板里的博客只能在平板电脑里使用<code>127.0.0.1</code>浏览，或者使用与平板电脑处于同一个wifi网络下的其他设备，使用<code>192.168.46.109</code>（也就是平板里的服务器的ip地址）来查看。如果想外面的网络也能看到的话，需要设置内网穿透。</p>
+<p>在网络上搜索浏览了一些解决方案后，最终把目光瞄准了frp（原因只有一个：那就是穷）。于是开始准备部署frp内网穿透。</p>
+<p>frp内网穿透使用时需要有一台具有公网ip的机器作为服务端，那么在我这里当然是使用VPS作为服务端，平板里的centos作为客户端。我们通过搜索可以在<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">Github</a>网站上看到，目前frp已经更新到了<code>0.32.0</code>版本。</p>
+<h3 id="服务端部署"><a href="#服务端部署" class="headerlink" title="服务端部署"></a>服务端部署</h3><p>首先SSH登陆到VPS中，使用<code> wget https://github.com/fatedier/frp/releases/download/v0.32.0/frp_0.32.0_linux_amd64.tar.gz</code>命令将frp程序文件下载到VPS中，然后使用<code>tar -xzvf frp_0.32.0_linux_amd64.tar.gz</code>解压，使用<code>mv frp_0.15.1_linux_amd64 frp</code>命令将文件夹改名为<code>frp</code>，使用<code>cd frp</code>命令进入该文件夹中，使用<code>vim frps.ini</code>命令修改配置文件。服务器端配置文件具体配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">token = 1100slfsdflkdf</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin</span><br><span class="line">vhost_http_port = 10080</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = warn</span><br><span class="line"></span><br><span class="line">[web1100800824]</span><br><span class="line">type = http</span><br><span class="line">custom_domains = xxx.com</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><p>“bind_port”表示用于客户端和服务端连接的端口，这个端口号我们之后在配置客户端的时候要用到。</p>
+</li>
+<li><p>“dashboard_port”是服务端仪表板的端口，若使用7500端口，在配置完成服务启动后可以通过浏览器访问 x.x.x.x:7500 （其中x.x.x.x为VPS的IP）查看frp服务运行信息。</p>
+</li>
+<li><p>“token”是用于客户端和服务端连接的口令，请自行设置并记录，稍后会用到。</p>
+</li>
+<li><p>“dashboard_user”和“dashboard_pwd”表示打开仪表板页面登录的用户名和密码，自行设置即可。</p>
+</li>
+<li><p>“vhost_http_port”和“vhost_https_port”用于反向代理HTTP主机时使用。</p>
+</li>
+<li><p>“log_file”是用来设置frps运行日志的文件目录的。</p>
+</li>
+<li><p>“log_level”用来设置写入日志中事件的级别，有trace, debug, info, warn, error几种。</p>
+</li>
+</ul>
+<p>文件内容写好后，保存并退出vim, 如果frp文件夹保存在<code>/usr/local/frp</code>文件夹中。先将配置文件中用到的端口打开，然后可以使用<code>nohup /usr/local/frp/frps -c /usr/local/frp/frps.ini &amp;</code>命令来后台启动frps。</p>
+<p>此时，可以使用VPS的ip地址：<code>xxx.xxx.xxx.xxx:7500</code>来查看frps仪表板页面，用户名和密码按设置的输入即可。</p>
+<h3 id="部署客户端"><a href="#部署客户端" class="headerlink" title="部署客户端"></a>部署客户端</h3><p>由于客户端也是centos系统，下载文件的方法类似，下载解压后进入frp文件夹，使用<code>vim frpc.ini</code>命令来编辑客户端配置文件。具体配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 45.63.455.364</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 1100slfsdflkdf</span><br><span class="line">log_file = /usr/local/frp/frpc.log</span><br><span class="line">log_level = warn</span><br><span class="line">tcp_mux = true</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 15251</span><br><span class="line"></span><br><span class="line">[web1100800824]</span><br><span class="line">type = http</span><br><span class="line">local_port = 8000</span><br><span class="line">custom_domains = xxx.com</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>“server_addr”填写服务器端的ip地址，我这里就是VPS的ip地址</li>
+<li>“server_port”填写服务器端设置的bind_port那个端口。</li>
+<li>“token”填写跟服务器端一样的连接口令。</li>
+<li>“log_file”是用来设置frps运行日志的文件目录的。</li>
+<li>“log_level”用来设置写入日志中事件的级别，有trace, debug, info, warn, error几种。</li>
+<li><code>[name]</code> 建立每个穿透服务，都需要命名一个此服务的名称，不能和其他已建立的相同。</li>
+<li>“type”设置穿透协议类型。可选：tcp，udp，http，https，stcp，xtcp。你要穿透什么应用要搞清楚，此应用是用什么协议的。</li>
+<li>“local_ip” 设置本地监听IP，可以是本地的局域网IP，也可以是本机的127.0.0.1 IP。</li>
+<li>“local_port”设置本地监听端口，用于监听本地设备需要穿透的端口，比如我要穿透到本机的SSH端口，而SSH端口为22，则这样理解。</li>
+<li>“remote_port”设置远程监听端口， 用于frps服务端的，分配建立穿透到内网对应应用的公网端口。需要frps服务端已开放此端口给frpc客户端允许对接使用。例如我可以连接到此(frps服务端IP：端口)，则可以穿透到我的内网对应应用服务。</li>
+<li>“custom_domains”设置域名，穿透协议为”http”或“https”的，必须要设置此域名。</li>
+</ul>
+<p>同样设置完毕保存后，在平板电脑的linux系统里使用<code>nohup ./frpc -c ./frpc.ini &amp;</code>来后台开启frpc。</p>
+<h3 id="frp穿透试用"><a href="#frp穿透试用" class="headerlink" title="frp穿透试用"></a>frp穿透试用</h3><p>服务器端和客户点端完成上述设置后，使用putty客户端进行连接试验。</p>
+<p>我的平板电脑的局域网ip是192.168.46.109，平时是使用该地址来进行SSH连接的。frp反向代理设置完毕后，可以使用45.63.455.364:15251来进行SSH连接，说明frp反向代理SSH已经成功。</p>
+<p>上面说过，博客在平板里部署完毕后，可以使用<code>127.0.0.1</code>进行浏览，但是外网无法访问。frp设置完毕后，可以使用<code>xxx.com:10080</code>来进行访问了，说明frp反向代理http服务也成功了。</p>
+<p>上面的http服务反向代理虽然成功了，但是每次访问的时候都要输入端口，很麻烦，经过搜索后，在网上找到了一种曲线救国的方法：</p>
+<p>我的VPS中部署博客时使用的是nginx，在nginx的配置文件<code>nginx.conf</code>中加入这样一段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name  xxx.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">      proxy_pass http://xxx.com:10080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样设置完毕后，就可以使用<code>xxx.com</code>来访问了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" data-id="clssne6xg000lxwz4dchlcr9g" data-title="在安卓手机上部署服务器并设置frp内网穿透" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" rel="tag">Android手机&#x2F;平板</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">frp内网穿透</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">web服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-20-Android手机平板安装使用LinuxDeploy安装CentOS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/20/2020-03-20-Android%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8LinuxDeploy%E5%AE%89%E8%A3%85CentOS/" class="article-date">
+  <time class="dt-published" datetime="2020-03-19T16:00:00.000Z" itemprop="datePublished">2020-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BA%9F%E6%97%A7%E6%89%8B%E6%9C%BA%E5%88%A9%E7%94%A8/">废旧手机利用</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/20/2020-03-20-Android%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8LinuxDeploy%E5%AE%89%E8%A3%85CentOS/">Android手机/平板安装使用Linux Deploy安装Centos</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Android手机-平板安装使用Linux-Deploy安装CentOS"><a href="#Android手机-平板安装使用Linux-Deploy安装CentOS" class="headerlink" title="Android手机&#x2F;平板安装使用Linux Deploy安装CentOS"></a>Android手机&#x2F;平板安装使用Linux Deploy安装CentOS</h1><p>手中有一个2016年底买的华为荣耀平板2，最近从一堆电子产品中把它翻了出来，本来想咸鱼卖了算了，结果二手回收估价，才估值150块钱，气得我肝疼。想了想，还是想办法废物利用一下吧，于是想到了把它改装成一个微型服务器。在网上搜了好多教程之后，自己又利用闲余时间鼓捣了三四天，最后终于成功了，在此记录一下。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>手机&#x2F;平板已经root</li>
+<li>需要用到的软件：Linux Depoly、busybox、JuiceSSH</li>
+</ul>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h3 id="安装busybox"><a href="#安装busybox" class="headerlink" title="安装busybox"></a>安装busybox</h3><p>网上在github网站下载一个busybox安装包，安装即可。（最好是安装ru.meefik版本的，与linux deploy是同一个版本）</p>
+<h3 id="安装Linux-Deploy"><a href="#安装Linux-Deploy" class="headerlink" title="安装Linux Deploy"></a>安装Linux Deploy</h3><p>同样在github网站下载一个Linux Deploy安装包，安装即可。</p>
+<h3 id="Linux-Deploy设置"><a href="#Linux-Deploy设置" class="headerlink" title="Linux Deploy设置"></a>Linux Deploy设置</h3><p>首先点开左侧菜单，点击“配置文件”，点击编辑改个你喜欢的名字。然后点击“设置”，【锁定wifi】，【CPU唤醒】，【屏幕常亮】，【联网更新】勾上，【PATH变量】最重要，点击并填上&#x2F;system&#x2F;xbin，这样才能关联Busybox。然后点击下面的【更新环境】。</p>
+<h3 id="TF卡分区"><a href="#TF卡分区" class="headerlink" title="TF卡分区"></a>TF卡分区</h3><p>由于准备用这台旧平板做服务器，Linux Deploy安装linux系统有三种方式，文件方式是指安装好的系统都在一个img文件里，向系统里添加文件比较麻烦，我也没弄明白，不推荐；目录方式是设置一个目录，系统所有的文件都在一个目录下，想访问安装目录上级的其他文件需要挂载，而且文件系统不能大于2G，用作服务器感觉比较鸡肋。最后选用了分区方式，在外置TF卡中进行分区，一个32G内存卡可以分成多个分区，31G大小分区用来安装系统都可以，相当灵活。</p>
+<h3 id="配置文件设置"><a href="#配置文件设置" class="headerlink" title="配置文件设置"></a>配置文件设置</h3><img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/Screenshot_2020-03-25-18-51-10.png" alt="配置文件1" style="zoom:50%;" />
+
+<p>这里需要注意的几件事：</p>
+<p>1.架构那一块是需要根据平板的CPU的架构来选择的，平板CPU的架构是<code>arm64</code>,但是这里没有这个选项，网上查阅了一些资料，资料显示<code>arm64</code>和<code>aarch64</code>实际上是同一回事，于是这里选择<code>aarch64</code>；</p>
+<p>2.源地址可以改成国内的源地址，但是我在使用的时候发现，改成国内的清华、阿里的源地址后安装一直不成功，我也不知道跟这个源地址有没有关系，但是使用默认的源地址就可以安装成功，那么这里就不改了；</p>
+<p>3.安装类型上面已经说过了，选择分区类型；</p>
+<p>4.安装路径最后的那个<code>mmcblkXpY</code>,如果需要安装在内置存储的话，<code>X=0</code>；如果安装在外置存储卡上的话，<code>X=1</code>。<code>Y</code>的值需要根据卡的分区来确定，这次安装的时候，我选择安装在外置存储卡上的第2个分区里，所以<code>X=1,Y=2</code>。</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/Screenshot_2020-03-25-18-51-24.png" alt="配置文件2" style="zoom:50%;" />
+
+<p>这里需要注意的几个问题：</p>
+<ol>
+<li><p>用户名，密码根据自己的习惯设置即可；</p>
+</li>
+<li><p>本地化这里选择<code>zh_CN.UTF-8</code>，本地系统可以正常显示中文汉字。</p>
+ <img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/Screenshot_2020-03-25-18-51-35.png" alt="配置文件3" style="zoom:50%;" /></li>
+</ol>
+<p>这里需要注意的问题：</p>
+<p>1.初始化这个选项，是用来设置启动安装好的linux系统时随着系统开启自动加载的服务的。如果需要设置开机自启的服务的话，需要勾选上。当然如果安装的时候没有勾选上的话，系统安装完成后使用的过程中可以随时勾选，更改了选择之后回到软件主界面，在右上角点击竖着的三个点，点击配置即可更新配置。</p>
+<p>2.挂载这个选项，因为我选择的是分区安装，这个TF卡30G的空间都给linux系统使用了，就不挂载手机内存上的资源了。</p>
+<p>3.SSH这个选项是一定要勾选上的，这样linux系统安装完成后，使用JuiceSSH这个软件根据前面设置的账号密码就可以登陆系统了。</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/Screenshot_2020-03-25-18-51-49.png" alt="配置文件4" style="zoom:50%;" />
+
+<p>这里需要注意的问题：</p>
+<p>1.声音服务和图形界面根据自己实际情况选择，因为我主要是用来做服务器，不需要图形界面，只要能SSH远程登陆就可以了，所以这两个都没选。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>根据上面的配置文件配置好安装的参数后，按返回键返回到软件主界面，点击软件主界面右上角的三个竖点，选择安装，就进入到安装过程了。这个过程根据网络情况的不同，耗时也不一样。我大概安装了15分钟左右就结束了。（安装开始的时候软件会要求获取root权限，这个权限必须要给，否则安装无法进行；或者点击安装没有反应的话，需要进入授权软件给linuxdeploy这个软件授权）</p>
+<p>开始安装：</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173507_uB6p_2846946.png" alt="安装过程1" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173521_s3rp_2846946.png" alt="安装过程2" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173556_CeBe_2846946.png" alt="安装过程3" style="zoom:50%;" />
+
+<p>出现<code>&lt;&lt;&lt;deploy</code>，说明安装过程已经结束了。</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173654_bzEb_2846946.png" alt="安装过程4" style="zoom:50%;" />
+
+<p>启动系统之前，先点击一下<code>停止</code>。</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173850_bV9L_2846946.png" alt="安装过程5" style="zoom:50%;" />
+
+<p>然后点击<code>启动</code>来启动系统，看到<code>&lt;&lt;&lt;start</code>说明系统启动完成。</p>
+<img src="https://raw.githubusercontent.com/1100800824/pictures/master/blog/173946_p7FM_2846946.png" alt="系统启动" style="zoom:50%;" />
+
+<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><p>系统启动完成后，就可以使用JuiceSSH这个软件来登陆系统了。</p>
+<p>PS：如果linux系统无法正常安装，启动不成功……等各种问题，先试试停止，然后将linux deploy软件杀后台，最后再次打开软件试试。如果还是不能正常操作的话，那么可以祭上万能大法：重启试试。当然此处的重启是指将手机或者平板重启一下，或许会收到意外的惊喜。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/20/2020-03-20-Android%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8LinuxDeploy%E5%AE%89%E8%A3%85CentOS/" data-id="clssne6xc000hxwz47it4ac1n" data-title="Android手机/平板安装使用Linux Deploy安装Centos" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" rel="tag">Android手机&#x2F;平板</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinuxDeploy/" rel="tag">LinuxDeploy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-12-学习过程中的碎碎念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/12/2020-03-12-%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="article-date">
+  <time class="dt-published" datetime="2020-03-11T16:00:00.000Z" itemprop="datePublished">2020-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/12/2020-03-12-%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">学习过程中的碎碎念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Windows下如何保持两个文件夹的内容同步更新"><a href="#Windows下如何保持两个文件夹的内容同步更新" class="headerlink" title="Windows下如何保持两个文件夹的内容同步更新"></a>Windows下如何保持两个文件夹的内容同步更新</h1><p>由于我的个人博客同步部署在个人网站和github网站上，两个博客的内容如果想同步更新，之前的做法一直是在一个文件夹内将内容写完保存后，手动将<code>.md</code>文件复制到另外一个文件夹里，比较费事。于是我就在想能不能有什么办法可以使两个文件夹里的内容同步更新。经过一番搜索后，先是明白了原来一直没有用过的Windows自带功能：<code>公文包</code>，可惜在<code>Windows 10</code>下该功能已经消失。</p>
+<p>后来又在<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23319725">知乎</a>上看到了一个方法，可以使用<code>mklink /J &quot;D:\xxx&quot; &quot;F:\xxx&quot;</code>命令来实现，自己试验了一下，果然很好用，从此不用每次都复制粘贴了。</p>
+<p>在此记录一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/12/2020-03-12-%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/" data-id="clssne6xa000gxwz44fj6fgi9" data-title="学习过程中的碎碎念" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-11-note-of-learning-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/11/2020-03-11-note-of-learning-git/" class="article-date">
+  <time class="dt-published" datetime="2020-03-10T16:00:00.000Z" itemprop="datePublished">2020-03-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/11/2020-03-11-note-of-learning-git/">note of learning git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h1><h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>如果是在Windows下进行操作，首先使用选择或者新建一个文件夹（目录的路径最好没有中文），然后在cmd或者powershell中使用cd命令进入这个目录。使用<code>git init</code>命令初始化一个仓库。此时需要注意的是，文件夹的名称就是这个仓库的名称。</p>
+<h2 id="向仓库添加文件"><a href="#向仓库添加文件" class="headerlink" title="向仓库添加文件"></a>向仓库添加文件</h2><p>仓库创建好了之后，就可以在这个目录下面写东西了。需要注意的是，所有的版本控制系统只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化。不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的。所以我学习了markdown语法，使用Typora来编辑文本文件。</p>
+<p>使用typora编写好文本文件后，将文件保存为<code>.md</code>格式的文档。然后使用<code>git add xxxx.md</code>命令向仓库添加文件。<code>git add</code>命令的意思是将文件添加到git仓库中。这一点需要注意，如果需要git管理仓库中的文件，需要做两件事情：1.将文件添加到仓库目录里；2.使用<code>git add</code>命令添加文件。如果是在仓库目录中修改已有的文件，那么每次修改过后都需要使用<code>git add</code>命令添加一次该文件。</p>
+<p>修改文件后使用<code>git status</code>命令查看状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &#x27;origin/master&#x27;.</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   _posts/2020-03-11-note-of-learning-git.md</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>git add xxxx.md</code>命令后再使用<code>git status</code>查看状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &#x27;origin/master&#x27;.</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   _posts/2020-03-11-note-of-learning-git.md</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h2><p>提交修改使用<code>git commit -m ‘xxxxxx’</code>命令；此次使用<code>git commit -m ‘添加note of learning git&#39;</code>命令提交修改，输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[master a990a74] 添加note of learning git</span><br><span class="line"> 1 file changed, 33 insertions(+), 1 deletion(-)</span><br></pre></td></tr></table></figure>
+
+<p>然后再使用<code>git status</code>命令查看状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is ahead of &#x27;origin/master&#x27; by 2 commits.</span><br><span class="line">  (use &quot;git push&quot; to publish your local commits)</span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
+
+<h2 id="与远程仓库关联"><a href="#与远程仓库关联" class="headerlink" title="与远程仓库关联"></a>与远程仓库关联</h2><p>在github网站新建一个与本地仓库一样名字的仓库后，可以使用<code>git remote add origin git@github.com:xxxxxxxx/xxxxxx.git</code>将本地仓库与github网站上的远程仓库关联起来，此时，远程仓库的名字就是<code>origin</code>。随后，可以使用<code>git push -u origin master</code>命令将本地仓库的所有内容一次性推送到远程仓库里。以后有修改内容需要再次推送时，可以省略<code>-u</code>参数。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/11/2020-03-11-note-of-learning-git/" data-id="clssne6x6000bxwz49h9l6x7x" data-title="note of learning git" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-10-note-of-writting-spider" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/10/2020-03-10-note-of-writting-spider/" class="article-date">
+  <time class="dt-published" datetime="2020-03-09T16:00:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/10/2020-03-10-note-of-writting-spider/">note of writting spider</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="随机请求头的使用"><a href="#随机请求头的使用" class="headerlink" title="随机请求头的使用"></a>随机请求头的使用</h1><p>在爬取网站内容时，如何同一个ip地址使用同一个请求头向服务器发出大量请求，可能会被服务器识别为恶意爬虫而封ip（个人理解，不一定十分准确）。为了避免这种现象发生，可以采用以下方法：1.随机使用请求头；2.使用ip代理池。当然如果两种方法同时使用，效果更佳。</p>
+<p>废话不说，直接上代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line">def get_headers():</span><br><span class="line">    USER_AGENTS = [</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;,</span><br><span class="line">    &#x27;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&#x27;,</span><br><span class="line">    &#x27;Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11&#x27;,</span><br><span class="line">    &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon 2.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Avant Browser&#x27;,</span><br><span class="line">    &#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1&#x27;,</span><br><span class="line">    ]</span><br><span class="line">    User_Agent = random.choice(USER_AGENTS)</span><br><span class="line">    headers = &#123;</span><br><span class="line">    &#x27;Accept&#x27;: &#x27;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#x27;,</span><br><span class="line">    &#x27;Accept-Language&#x27;: &#x27;en&#x27;,</span><br><span class="line">    &#x27;User-Agent&#x27;: User_Agent</span><br><span class="line">    &#125;</span><br><span class="line">    return headers</span><br></pre></td></tr></table></figure>
+
+<p>仅作为个人学习记录之用，写的相当随意。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/10/2020-03-10-note-of-writting-spider/" data-id="clssne6ww0006xwz46midclg8" data-title="note of writting spider" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/random-headers/" rel="tag">random headers</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spider/" rel="tag">spider</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-10-note-of-learning-xpath" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/10/2020-03-10-note-of-learning-xpath/" class="article-date">
+  <time class="dt-published" datetime="2020-03-09T16:00:00.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/xpath/">xpath</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/10/2020-03-10-note-of-learning-xpath/">note of learning xpath</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Note-of-learning-xpath"><a href="#Note-of-learning-xpath" class="headerlink" title="Note of learning xpath"></a>Note of learning xpath</h1><h2 id="xpath术语"><a href="#xpath术语" class="headerlink" title="xpath术语"></a>xpath术语</h2><h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><p>在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;bookstore&gt;</span><br><span class="line"></span><br><span class="line">&lt;book&gt;</span><br><span class="line">  &lt;title lang=&quot;eng&quot;&gt;Harry Potter&lt;/title&gt;</span><br><span class="line">  &lt;price&gt;29.99&lt;/price&gt;</span><br><span class="line">&lt;/book&gt;</span><br><span class="line"></span><br><span class="line">&lt;book&gt;</span><br><span class="line">  &lt;title lang=&quot;eng&quot;&gt;Learning XML&lt;/title&gt;</span><br><span class="line">  &lt;price&gt;39.95&lt;/price&gt;</span><br><span class="line">&lt;/book&gt;</span><br><span class="line"></span><br><span class="line">&lt;/bookstore&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上面的xml文档为例，存在以下节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bookstore&gt; （文档节点）</span><br><span class="line">&lt;author&gt;J K. Rowling&lt;/author&gt; （元素节点）</span><br><span class="line">lang=&quot;en&quot; （属性节点）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="节点关系"><a href="#节点关系" class="headerlink" title="节点关系"></a>节点关系</h3><p>父、子、同胞、先辈、后代，以人类社会关系类比即可。</p>
+<hr>
+<h2 id="xpath语法"><a href="#xpath语法" class="headerlink" title="xpath语法"></a>xpath语法</h2><h3 id="选取节点"><a href="#选取节点" class="headerlink" title="选取节点"></a>选取节点</h3><p>XPath 使用路径表达式在 XML 文档中选取节点。节点是通过沿着路径或者 step 来选取的。</p>
+<p>下面列出了最有用的路径表达式：</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">nodename</td>
+<td align="left">选取此节点的所有子节点。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;</td>
+<td align="left">从根节点选取。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;</td>
+<td align="left">从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">选取当前节点。</td>
+</tr>
+<tr>
+<td align="left">..</td>
+<td align="left">选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td align="left">@</td>
+<td align="left">选取属性。</td>
+</tr>
+</tbody></table>
+<p>在下面的表格中，我们已列出了一些路径表达式以及表达式的结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bookstore</td>
+<td align="left">选取 bookstore 元素的所有子节点。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore</td>
+<td align="left">选取根元素 bookstore。注释：假如路径起始于正斜杠( &#x2F; )，则此路径始终代表到某元素的绝对路径！</td>
+</tr>
+<tr>
+<td align="left">bookstore&#x2F;book</td>
+<td align="left">选取属于 bookstore 的子元素的所有 book 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;book</td>
+<td align="left">选取所有 book 子元素，而不管它们在文档中的位置。</td>
+</tr>
+<tr>
+<td align="left">bookstore&#x2F;&#x2F;book</td>
+<td align="left">选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;@lang</td>
+<td align="left">选取名为 lang 的所有属性。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="谓语（Predicates）"><a href="#谓语（Predicates）" class="headerlink" title="谓语（Predicates）"></a>谓语（Predicates）</h3><p>谓语用来查找某个特定的节点或者包含某个指定的值的节点。</p>
+<p>谓语被嵌在方括号中。</p>
+<p>在下面的表格中，我们列出了带有谓语的一些路径表达式，以及表达式的结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x2F;bookstore&#x2F;book[1]</td>
+<td align="left">选取属于 bookstore 子元素的第一个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore&#x2F;book[last()]</td>
+<td align="left">选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore&#x2F;book[last()-1]</td>
+<td align="left">选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore&#x2F;book[position()&lt;3]</td>
+<td align="left">选取最前面的两个属于 bookstore 元素的子元素的 book 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;title[@lang]</td>
+<td align="left">选取所有拥有名为 lang 的属性的 title 元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;title[@lang&#x3D;’eng’]</td>
+<td align="left">选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore&#x2F;book[price&gt;35.00]</td>
+<td align="left">选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;bookstore&#x2F;book[price&gt;35.00]&#x2F;title</td>
+<td align="left">选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="选取未知节点"><a href="#选取未知节点" class="headerlink" title="选取未知节点"></a>选取未知节点</h3><p>XPath 通配符可用来选取未知的 XML 元素。</p>
+<table>
+<thead>
+<tr>
+<th align="left">通配符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">匹配任何元素节点。</td>
+</tr>
+<tr>
+<td align="left">@*</td>
+<td align="left">匹配任何属性节点。</td>
+</tr>
+<tr>
+<td align="left">node()</td>
+<td align="left">匹配任何类型的节点。</td>
+</tr>
+</tbody></table>
+<p>在下面的表格中，我们列出了一些路径表达式，以及这些表达式的结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x2F;bookstore&#x2F;*</td>
+<td align="left">选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;*</td>
+<td align="left">选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x2F;title[@*]</td>
+<td align="left">选取所有带有属性的 title 元素。</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/10/2020-03-10-note-of-learning-xpath/" data-id="clssne6x3000axwz41mg5f66w" data-title="note of learning xpath" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xpath/" rel="tag">xpath</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-03-03-note-of-learning-regex" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/03/2020-03-03-note-of-learning-regex/" class="article-date">
+  <time class="dt-published" datetime="2020-03-02T16:00:00.000Z" itemprop="datePublished">2020-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/regex/">regex</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/03/03/2020-03-03-note-of-learning-regex/">note of learning regex</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习正则表达式"><a href="#学习正则表达式" class="headerlink" title="学习正则表达式"></a>学习正则表达式</h1><h2 id="正则表达式元字符介绍"><a href="#正则表达式元字符介绍" class="headerlink" title="正则表达式元字符介绍"></a>正则表达式元字符介绍</h2><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td align="center">匹配任意单个字符（除了换行符）</td>
+</tr>
+<tr>
+<td>[]</td>
+<td align="center">匹配方括号内的任意字符</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td align="center">匹配除了方括号内的任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td align="center">匹配&gt;&#x3D;0个在*号之前的字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td align="center">匹配&gt;&#x3D;1个在+号之前的字符</td>
+</tr>
+<tr>
+<td>?</td>
+<td align="center">匹配0个或1个在?号之前的字符</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td align="center">匹配num个大括号之前的字符(n&lt;num&lt;m)</td>
+</tr>
+<tr>
+<td>(xyz)</td>
+<td align="center">匹配与xyz完全一样的字符</td>
+</tr>
+<tr>
+<td>|</td>
+<td align="center">匹配符号前或后的字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td align="center">转义字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td align="center">检查匹配的字符串是否在所匹配字符串的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td align="center">检查匹配的字符串是否在所匹配字符串的结尾</td>
+</tr>
+</tbody></table>
+<h2 id="常用的简写字符集"><a href="#常用的简写字符集" class="headerlink" title="常用的简写字符集"></a>常用的简写字符集</h2><table>
+<thead>
+<tr>
+<th>简写</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td align="center">除换行符外的所有字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td align="center">匹配所有字母数字，等同于：[a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td>\W</td>
+<td align="center">匹配所有非字母数字，即所有符号，等同于：[^\w]</td>
+</tr>
+<tr>
+<td>\d</td>
+<td align="center">匹配所有数字，等同于：[0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td align="center">匹配所有非数字，等同于：[^\d]</td>
+</tr>
+<tr>
+<td>\s</td>
+<td align="center">匹配所有空格字符，等同于：[\t\n\f\r\p{Z}]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td align="center">匹配所有非空格自付费，等同于：[^\s]</td>
+</tr>
+<tr>
+<td>\t</td>
+<td align="center">匹配一个制表符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td align="center">匹配一个换行符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td align="center">匹配一个换页符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td align="center">匹配一个回车符</td>
+</tr>
+<tr>
+<td>\v</td>
+<td align="center">匹配一个垂直制表符</td>
+</tr>
+<tr>
+<td>\p</td>
+<td align="center">匹配CP\LF（等同与\r\n），用来匹配DOS行终止符</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/03/2020-03-03-note-of-learning-regex/" data-id="clssne6wt0005xwz4b5h9gz8j" data-title="note of learning regex" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/" rel="tag">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-02-20-学习Markdown语法的笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/02/22/2020-02-20-%E5%AD%A6%E4%B9%A0Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2020-02-21T16:00:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/02/22/2020-02-20-%E5%AD%A6%E4%B9%A0Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/">note of learning markdown</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习Markdown语法的笔记"><a href="#学习Markdown语法的笔记" class="headerlink" title="学习Markdown语法的笔记"></a>学习Markdown语法的笔记</h1><h2 id="字体加粗与斜体"><a href="#字体加粗与斜体" class="headerlink" title="字体加粗与斜体"></a>字体加粗与斜体</h2><p>下面展示如何加粗字体，<strong>加粗字体</strong>是这样的，接下来展示如何使用斜体，<em>斜体</em>是这样的。然后是加粗斜体，答案当然很简单，那就是<strong>加粗</strong>和<em>斜体</em>的组合啦，是<em><strong>这样</strong></em>的。  <del>删除线</del>是这样的，<u>下划线</u>是这样的。</p>
+<hr>
+<hr>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>好的，我们继续往下学习。<br/><br><a target="_blank" rel="noopener" href="https://github.com/1100800824">github</a>是一个指向我的<strong>github账户</strong>的链接，<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/yao-wen-chao">知乎</a>是指向我<strong>知乎账户</strong>的链接。</p>
+<hr>
+<hr>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>学习了链接之后，我们继续，让我们一起来试试表格。</p>
+<table>
+<thead>
+<tr>
+<th align="right">姓名</th>
+<th align="center">技能</th>
+<th align="left">排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">刘备</td>
+<td align="center">哭</td>
+<td align="left">大哥</td>
+</tr>
+<tr>
+<td align="right">关羽</td>
+<td align="center">打</td>
+<td align="left">二哥</td>
+</tr>
+<tr>
+<td align="right">张飞</td>
+<td align="center">骂</td>
+<td align="left">三哥</td>
+</tr>
+</tbody></table>
+<hr>
+<hr>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>好的，目前看起来学习效果不错，我们继续往下进行吧<br/><br>单行代码是这样的：<code>import os</code><br/><br>多行代码是这样的：<br/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">def creat_dir(name)</span><br><span class="line">​		if not os.path.exist(name):</span><br><span class="line">​				mkdir(name)</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>那么，接下来我们试试列表吧<br/><br>​	无序列表是这样的：<br/><br>​		-  这是第一行<br/><br>​		-  这是第二行<br/><br>​    	-  这是第三行<br/><br>​	有序列表是这样的：<br/><br>​		1. 这是第一行<br/><br>​		2. 这是第二行<br/><br>​		3. 这是第三行<br/></p>
+<hr>
+<hr>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>真棒，下面我们来试试引用是如何工作的<br/>引用时只需要在引用的文字前加&gt;即可。<br/></p>
+<blockquote>
+<p>这是一个引用</p>
+<blockquote>
+<p>这也是一个引用</p>
+<blockquote>
+<p>这还是一个引用</p>
+<blockquote>
+<p>这依然是一个引用</p>
+<blockquote>
+<p>好吧，我要疯了，这还是一个引用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr>
+<hr>
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>好的，下面我们来试试如何插入图片<br/><br><img src="https://github.com/1100800824/hello-world/blob/master/about-me.jpg" alt="yao-wen-chao" title="yao-wen-chao"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/22/2020-02-20-%E5%AD%A6%E4%B9%A0Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/" data-id="clssne6w00000xwz497n63c8x" data-title="note of learning markdown" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-02-20-这是学习MarkDown语法的第二天" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/02/22/2020-02-20-%E8%BF%99%E6%98%AF%E5%AD%A6%E4%B9%A0MarkDown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A9/" class="article-date">
+  <time class="dt-published" datetime="2020-02-21T16:00:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/02/22/2020-02-20-%E8%BF%99%E6%98%AF%E5%AD%A6%E4%B9%A0MarkDown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A9/">note of learning markdown</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="这是学习MarkDown语法的第二天"><a href="#这是学习MarkDown语法的第二天" class="headerlink" title="这是学习MarkDown语法的第二天"></a>这是学习MarkDown语法的第二天</h1><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>试试超链接吧<br/><a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>一下，你就知道，<a target="_blank" rel="noopener" href="https://zhihu.com/">知乎</a>是一个很好的网站。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/22/2020-02-20-%E8%BF%99%E6%98%AF%E5%AD%A6%E4%B9%A0MarkDown%E8%AF%AD%E6%B3%95%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A9/" data-id="clssne6wh0001xwz4cfh6alay" data-title="note of learning markdown" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/regex/">regex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xpath/">xpath</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%9F%E6%97%A7%E6%89%8B%E6%9C%BA%E5%88%A9%E7%94%A8/">废旧手机利用</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" rel="tag">Android手机&#x2F;平板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxDeploy/" rel="tag">LinuxDeploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">frp内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/random-headers/" rel="tag">random headers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/" rel="tag">regex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">web服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xpath/" rel="tag">xpath</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" style="font-size: 15px;">Android手机/平板</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/LinuxDeploy/" style="font-size: 10px;">LinuxDeploy</a> <a href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">frp内网穿透</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/random-headers/" style="font-size: 10px;">random headers</a> <a href="/tags/regex/" style="font-size: 10px;">regex</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">web服务器</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
     </div>
   </div>
 
@@ -152,6 +1054,22 @@
         
           <li>
             <a href="/2024/02/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">在安卓手机上部署服务器并设置frp内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/20/2020-03-20-Android%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8LinuxDeploy%E5%AE%89%E8%A3%85CentOS/">Android手机/平板安装使用Linux Deploy安装Centos</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/12/2020-03-12-%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">学习过程中的碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/11/2020-03-11-note-of-learning-git/">note of learning git</a>
           </li>
         
       </ul>

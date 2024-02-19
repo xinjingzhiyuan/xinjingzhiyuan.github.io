@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2020-02-22-hexo+git+nodejs+nginx+使用centos7的VPS搭建博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/02/22/2020-02-22-hexo+git+nodejs+nginx+%E4%BD%BF%E7%94%A8centos7%E7%9A%84VPS%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="article-date">
+  <time class="dt-published" datetime="2020-02-21T16:00:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/02/22/2020-02-22-hexo+git+nodejs+nginx+%E4%BD%BF%E7%94%A8centos7%E7%9A%84VPS%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">hexo+git+nodejs+nginx+使用centos7的VPS搭建博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>废话不说，直接上干货。</p>
+<h2 id="本机（个人电脑）上的操作（以win10-64位系统为例）"><a href="#本机（个人电脑）上的操作（以win10-64位系统为例）" class="headerlink" title="本机（个人电脑）上的操作（以win10 64位系统为例）"></a>本机（个人电脑）上的操作（以win10 64位系统为例）</h2><h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>在官网下载软件，一路默认安装即可。</p>
+<h3 id="安装Git-不要使用最新版本，2-10左右即可"><a href="#安装Git-不要使用最新版本，2-10左右即可" class="headerlink" title="安装Git(不要使用最新版本，2.10左右即可)"></a>安装Git(不要使用最新版本，2.10左右即可)</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>在<a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">淘宝镜像</a>上下载合适的版本，一路默认安装即可（在安装时记得勾选add to path）。</p>
+<h4 id="生成ssh密钥"><a href="#生成ssh密钥" class="headerlink" title="生成ssh密钥"></a>生成ssh密钥</h4><p>按下面的步骤进行：</p>
+<p>1.打开 <code>C:\Users\&lt;用户名&gt;\.ssh</code>文件夹，如果没有就新建<br>        2.在空白处单击右键，选择<code>Git Bash Here</code>打开终端<br>        3.设置git用户名<br/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line">git config --global user.name &quot;username&quot;</span><br></pre></td></tr></table></figure>
+
+<p>4.生成ssh密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建网站目录"><a href="#创建网站目录" class="headerlink" title="创建网站目录"></a>创建网站目录</h3><p>在电脑的任意位置创建一个文件夹（例如<code>E:\hexo</code>，下文以此代替），作为网站目录。</p>
+<h3 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 <code>hexo</code></h3><p>打开 <code>powershell</code>, 通过<code>cd</code>命令进入<code>E:\hexo</code>, 执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br><span class="line">hexo d -fg</span><br><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
+
+<p>打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 即可看到你的站点（当然还没有发布到网络）。</p>
+<h1 id="在安装有centos7-的VPS中的操作"><a href="#在安装有centos7-的VPS中的操作" class="headerlink" title="在安装有centos7 的VPS中的操作"></a>在安装有centos7 的VPS中的操作</h1><p>关于如何购买VPS，购买域名，备案，设置DNS等操作在此就不赘述了，请自行百度。</p>
+<p>此处为<code>centos</code>在<code>root</code>用户下的操作，关于连接VPS，Windows 用户请使用<a target="_blank" rel="noopener" href="http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe">Putty</a>（提示： Putty 中使用粘贴仅需鼠标右键）。关于vi操作，按下i键进入编辑模式，编辑结束后按<code>esc</code>键退出，这时按<code>：</code> ，并输入 <code>wq</code> ，即可。</p>
+<h2 id="安装git-core"><a href="#安装git-core" class="headerlink" title="安装git-core"></a>安装git-core</h2><p>我使用的centos7 64位系统自带git, 如果没有的话，使用如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update &amp;&amp; apt-get upgrade -y #更新内核</span><br><span class="line">yum install git-core</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装nodejs-不是必要的，只是折腾到这里了，顺便记录一下"><a href="#安装nodejs-不是必要的，只是折腾到这里了，顺便记录一下" class="headerlink" title="安装nodejs(不是必要的，只是折腾到这里了，顺便记录一下)"></a>安装nodejs(不是必要的，只是折腾到这里了，顺便记录一下)</h2><p>这里我推荐使用nvs安装nodejs，具体操作详见<a target="_blank" rel="noopener" href="https://github.com/jasongin/nvs/">https://github.com/jasongin/nvs/</a> ,简要步骤如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export NVS_HOME=&quot;$HOME/.nvs&quot; #指定安装路径</span><br><span class="line">git clone https://github.com/jasongin/nvs &quot;$NVS_HOME&quot; #克隆副本</span><br><span class="line">. &quot;$NVS_HOME/nvs.sh&quot; install #安装nvs</span><br><span class="line">nvs add lts #安装最新的LTS版本</span><br><span class="line">nvs use lts #使用该版本</span><br><span class="line">nvs link lts #将其永久加入到path中</span><br></pre></td></tr></table></figure>
+
+<p>以上操作完成后，VPS中应该安装好了nodejs 和npm。</p>
+<h2 id="安装-nginx"><a href="#安装-nginx" class="headerlink" title="安装 nginx"></a>安装 nginx</h2><p>参考[<a target="_blank" rel="noopener" href="https://qizhanming.com/blog/2018/08/06/how-to-install-nginx-on-centos-7">Zhanming’s blog</a>的文章，需要先添加源，然后使用<code>yum install</code>命令安装。具体命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line">sudo yum install nginx</span><br><span class="line">sudo systemctl enable nginx</span><br><span class="line">sudo systemctl start nginx</span><br></pre></td></tr></table></figure>
+
+<p>VPS需要打开一些端口，比如80 ，443等，常见命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent  #永久打开80端口</span><br><span class="line">firewall-cmd --reload #防火墙重载</span><br><span class="line">firewall-cmd --zone=public --list-ports #查看所有打开的端口</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建git用户添加sudo权限"><a href="#新建git用户添加sudo权限" class="headerlink" title="新建git用户添加sudo权限"></a>新建git用户添加sudo权限</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">chmod 740 /etc/sudoers</span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>在vi编辑中找到如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Allow root to run any commands anywhere</span><br><span class="line">root    ALL=(ALL)     ALL</span><br></pre></td></tr></table></figure>
+
+<p>在下面添加一行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git   ALL=(ALL)     ALL</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出后执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 440 /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建git仓库，并配置ssh登录"><a href="#创建git仓库，并配置ssh登录" class="headerlink" title="创建git仓库，并配置ssh登录"></a>创建git仓库，并配置ssh登录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">cd ~</span><br><span class="line">mkdir .ssh &amp;&amp; cd .ssh</span><br><span class="line">touch authorized_keys</span><br><span class="line">vi authorized_keys//在这个文件中粘贴进刚刚申请的key（在id_rsa.pub文件中）</span><br><span class="line">cd ~ </span><br><span class="line">mkdir hexo.git &amp;&amp; cd hexo.git</span><br><span class="line">git init --bare</span><br></pre></td></tr></table></figure>
+
+<p>测试一下，如果在<code>git bash</code>中输入<code>ssh git@VPS的IP地址</code>,能够远程登录的话，则表示设置成功了。</p>
+<p>这里我一直没成功，一直显示<code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>输入<code>yes</code>后让输入密码，可是我开始就没设置密码，最后参照<a target="_blank" rel="noopener" href="https://huifeng.me/2015/08/16/deploy-hexo-to-vps/">回风</a>的博客，看到了这个：</p>
+<p>如果出问题了,请试试看看运行 <code>ll -a /home/git/</code>, 看看<code>.ssh</code>目录的拥有者是否是<code>git:git</code>,实在不行就运行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chown -R git:git .ssh</span><br><span class="line">chmod 700 .ssh</span><br><span class="line">chmod 600 .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>如果还不行，试试在本机电脑.ssh文件夹下（也就是生成公钥的文件夹）创建config文件，输入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># alex&#x27;s git server</span><br><span class="line">Host VPS的IP</span><br><span class="line">HostName VPS的IP</span><br><span class="line">User git</span><br><span class="line">Port SSH端口</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建网站目录并赋予git对网站目录的所有权"><a href="#创建网站目录并赋予git对网站目录的所有权" class="headerlink" title="创建网站目录并赋予git对网站目录的所有权"></a>创建网站目录并赋予git对网站目录的所有权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www</span><br><span class="line">mkdir hexo</span><br><span class="line">chown git:git -R /var/www/hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置git-hooks"><a href="#配置git-hooks" class="headerlink" title="配置git hooks"></a>配置git hooks</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">cd /home/git/hexo.git/hooks</span><br><span class="line">vim post-receive</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容后保存退出，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">GIT_REPO=/home/git/hexo.git #git仓库</span><br><span class="line">TMP_GIT_CLONE=/tmp/hexo</span><br><span class="line">PUBLIC_WWW=/var/www/hexo #网站目录</span><br><span class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;</span><br><span class="line">git clone $GIT_REPO $TMP_GIT_CLONE</span><br><span class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*</span><br><span class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后赋予脚本的执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/hexo.conf</span><br><span class="line"></span><br><span class="line">插入如下代码：</span><br><span class="line">server &#123;</span><br><span class="line">    listen         80 ;</span><br><span class="line">    root /var/www/hexo;//这里可以改成你的网站目录地址，我将网站放在/var/www/hexo</span><br><span class="line">    server_name example.com www.example.com;//这里输入你的域名或IP地址</span><br><span class="line">    access_log  /var/log/nginx/hexo_access.log;</span><br><span class="line">    error_log   /var/log/nginx/hexo_error.log;</span><br><span class="line">    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &#123;</span><br><span class="line">            root /var/www/hexo;</span><br><span class="line">            access_log   off;</span><br><span class="line">            expires      1d;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &#123;</span><br><span class="line">        root /var/www/hexo;</span><br><span class="line">        access_log   off;</span><br><span class="line">        expires      10m;</span><br><span class="line">    &#125;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /var/www/hexo;//这里可以改成你的网站目录地址，我将网站放在/var/www/hexo</span><br><span class="line">        if (-f $request_filename) &#123;</span><br><span class="line">            rewrite ^/(.*)$  /$1 break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启Nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="本机的最后配置"><a href="#本机的最后配置" class="headerlink" title="本机的最后配置"></a>本机的最后配置</h2><h3 id="配置hexo配置文件"><a href="#配置hexo配置文件" class="headerlink" title="配置hexo配置文件"></a>配置hexo配置文件</h3><p>位于<code>hexo</code>文件夹下，<code>_config.yml</code>,修改<code>deploy</code>选项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: update</span><br><span class="line">  repo:</span><br><span class="line">    s1: git@VPS的ip地址或域名:git仓库地址,master</span><br><span class="line">##例如</span><br><span class="line">deploy:</span><br><span class="line">      type: git</span><br><span class="line">      message: update</span><br><span class="line">      repo:</span><br><span class="line">    		s1: git@45.63.45.446:hexo.git,master</span><br></pre></td></tr></table></figure>
+
+<p>接着在<code>hexo</code>文件夹内，按住<code>shift</code>右击，选择<code>在此处打开命令窗口</code>（当然你也可以用<code>cd</code>命令），运行<code>hexo g hexo d</code>，如果一切正常，静态文件已经被成功的push到了blog的仓库里。以上，博客已经完全建好了。</p>
+<h4 id="这里遇到的坑"><a href="#这里遇到的坑" class="headerlink" title="这里遇到的坑"></a>这里遇到的坑</h4><p><code>hexo g</code> 报错，安装hexo-delopyer-git后解决。</p>
+<h2 id="更新博客"><a href="#更新博客" class="headerlink" title="更新博客"></a>更新博客</h2><p>使用一款 MarkDown 编辑器写 Blog 。写完后将文件以 *.md 的格式保存在本地<code>[网站目录]\source\_posts</code>中。文件编码必须为 UTF-8，这一点仅 Windows 用户需注意。</p>
+<p>每篇 Blog 都有固定的参数必须填写，参数如下，注意每个参数的 : 后都有一个空格。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">title: title</span><br><span class="line">date: yyyy-mm-dd</span><br><span class="line">categories: category  </span><br><span class="line">tags: tag</span><br><span class="line">#多标签请这样写：  </span><br><span class="line">#tags: [tag1,tag2,tag3]</span><br><span class="line">#或者这样写： </span><br><span class="line">#tags:</span><br><span class="line">#- tag1 </span><br><span class="line">#- tag2  </span><br><span class="line">#- tag3  </span><br><span class="line">---  </span><br><span class="line">正文  </span><br></pre></td></tr></table></figure>
+
+<p>编写完后，只需要在hexo文件夹下执行<code>hexo g &amp;&amp; hexo d</code>，博客即可更新。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/22/2020-02-22-hexo+git+nodejs+nginx+%E4%BD%BF%E7%94%A8centos7%E7%9A%84VPS%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" data-id="clssne6wq0004xwz4a453dt3y" data-title="hexo+git+nodejs+nginx+使用centos7的VPS搭建博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/regex/">regex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xpath/">xpath</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%9F%E6%97%A7%E6%89%8B%E6%9C%BA%E5%88%A9%E7%94%A8/">废旧手机利用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" rel="tag">Android手机&#x2F;平板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LinuxDeploy/" rel="tag">LinuxDeploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">frp内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/random-headers/" rel="tag">random headers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/" rel="tag">regex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">web服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xpath/" rel="tag">xpath</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" style="font-size: 15px;">Android手机/平板</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/LinuxDeploy/" style="font-size: 10px;">LinuxDeploy</a> <a href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">frp内网穿透</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/random-headers/" style="font-size: 10px;">random headers</a> <a href="/tags/regex/" style="font-size: 10px;">regex</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">web服务器</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/26/2020-03-26-%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%AE%BE%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">在安卓手机上部署服务器并设置frp内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/20/2020-03-20-Android%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8LinuxDeploy%E5%AE%89%E8%A3%85CentOS/">Android手机/平板安装使用Linux Deploy安装Centos</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/12/2020-03-12-%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">学习过程中的碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/11/2020-03-11-note-of-learning-git/">note of learning git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
