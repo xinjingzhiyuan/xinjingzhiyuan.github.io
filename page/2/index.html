@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"1100800824.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":320,"Pisces | Gemini":240,"width":300,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"1100800824.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":320,"Pisces | Gemini":240,"width":300,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="Learning And Living">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/af3db961.html">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/cd8bb158.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -176,7 +176,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/article/af3db961.html" class="post-title-link" itemprop="url">学习过程中的碎碎念</a>
+            <a href="/article/cd8bb158.html" class="post-title-link" itemprop="url">note of writting spider</a>
         </h2>
 
         <div class="post-meta">
@@ -186,15 +186,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-12T00:00:00+08:00">2020-03-12</time>
+              <time title="创建时间：2020-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-10T00:00:00+08:00">2020-03-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-20 11:37:12" itemprop="dateModified" datetime="2024-02-20T11:37:12+08:00">2024-02-20</time>
+                <time title="修改时间：2024-03-04 21:15:32" itemprop="dateModified" datetime="2024-03-04T21:15:32+08:00">2024-03-04</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
 
           
 
@@ -207,9 +216,311 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Windows下如何保持两个文件夹的内容同步更新"><a href="#Windows下如何保持两个文件夹的内容同步更新" class="headerlink" title="Windows下如何保持两个文件夹的内容同步更新"></a>Windows下如何保持两个文件夹的内容同步更新</h1><p>由于我的个人博客同步部署在个人网站和github网站上，两个博客的内容如果想同步更新，之前的做法一直是在一个文件夹内将内容写完保存后，手动将<code>.md</code>文件复制到另外一个文件夹里，比较费事。于是我就在想能不能有什么办法可以使两个文件夹里的内容同步更新。经过一番搜索后，先是明白了原来一直没有用过的Windows自带功能：<code>公文包</code>，可惜在<code>Windows 10</code>下该功能已经消失。</p>
-<p>后来又在<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23319725">知乎</a>上看到了一个方法，可以使用<code>mklink /J &quot;D:\xxx&quot; &quot;F:\xxx&quot;</code>命令来实现，自己试验了一下，果然很好用，从此不用每次都复制粘贴了。</p>
-<p>在此记录一下。</p>
+          <h1 id="随机请求头的使用"><a href="#随机请求头的使用" class="headerlink" title="随机请求头的使用"></a>随机请求头的使用</h1><p>在爬取网站内容时，如何同一个ip地址使用同一个请求头向服务器发出大量请求，可能会被服务器识别为恶意爬虫而封ip（个人理解，不一定十分准确）。为了避免这种现象发生，可以采用以下方法：1.随机使用请求头；2.使用ip代理池。当然如果两种方法同时使用，效果更佳。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/article/cd8bb158.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/47324fb1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YaoWenchao">
+      <meta itemprop="description" content="Learning And Living">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="淡泊明志，宁静致远">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/article/47324fb1.html" class="post-title-link" itemprop="url">note of learning regex</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-03T00:00:00+08:00">2020-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-04 21:16:19" itemprop="dateModified" datetime="2024-03-04T21:16:19+08:00">2024-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/regex/" itemprop="url" rel="index"><span itemprop="name">regex</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="学习正则表达式"><a href="#学习正则表达式" class="headerlink" title="学习正则表达式"></a>学习正则表达式</h1><h2 id="正则表达式元字符介绍"><a href="#正则表达式元字符介绍" class="headerlink" title="正则表达式元字符介绍"></a>正则表达式元字符介绍</h2><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td align="center">匹配任意单个字符（除了换行符）</td>
+</tr>
+<tr>
+<td>[]</td>
+<td align="center">匹配方括号内的任意字符</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td align="center">匹配除了方括号内的任意字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td align="center">匹配&gt;&#x3D;0个在*号之前的字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td align="center">匹配&gt;&#x3D;1个在+号之前的字符</td>
+</tr>
+<tr>
+<td>?</td>
+<td align="center">匹配0个或1个在?号之前的字符</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td align="center">匹配num个大括号之前的字符(n&lt;num&lt;m)</td>
+</tr>
+<tr>
+<td>(xyz)</td>
+<td align="center">匹配与xyz完全一样的字符</td>
+</tr>
+<tr>
+<td>|</td>
+<td align="center">匹配符号前或后的字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td align="center">转义字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td align="center">检查匹配的字符串是否在所匹配字符串的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td align="center">检查匹配的字符串是否在所匹配字符串的结尾</td>
+</tr>
+</tbody></table>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/article/47324fb1.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/aa24a2b1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YaoWenchao">
+      <meta itemprop="description" content="Learning And Living">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="淡泊明志，宁静致远">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/article/aa24a2b1.html" class="post-title-link" itemprop="url">note of learning markdown</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-22T00:00:00+08:00">2020-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-04 21:16:52" itemprop="dateModified" datetime="2024-03-04T21:16:52+08:00">2024-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="学习Markdown语法的笔记"><a href="#学习Markdown语法的笔记" class="headerlink" title="学习Markdown语法的笔记"></a>学习Markdown语法的笔记</h1><h2 id="字体加粗与斜体"><a href="#字体加粗与斜体" class="headerlink" title="字体加粗与斜体"></a>字体加粗与斜体</h2><p>下面展示如何加粗字体，<strong>加粗字体</strong>是这样的，接下来展示如何使用斜体，<em>斜体</em>是这样的。然后是加粗斜体，答案当然很简单，那就是<strong>加粗</strong>和<em>斜体</em>的组合啦，是<em><strong>这样</strong></em>的。  <del>删除线</del>是这样的，<u>下划线</u>是这样的。</p>
+<hr>
+<hr>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>好的，我们继续往下学习。<br/><br><a target="_blank" rel="noopener" href="https://github.com/1100800824">github</a>是一个指向我的<strong>github账户</strong>的链接，<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/yao-wen-chao">知乎</a>是指向我<strong>知乎账户</strong>的链接。</p>
+<hr>
+<hr>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/article/aa24a2b1.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/aa24a2b1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YaoWenchao">
+      <meta itemprop="description" content="Learning And Living">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="淡泊明志，宁静致远">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/article/aa24a2b1.html" class="post-title-link" itemprop="url">note of learning markdown</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-22T00:00:00+08:00">2020-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-02-20 11:37:12" itemprop="dateModified" datetime="2024-02-20T11:37:12+08:00">2024-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="这是学习MarkDown语法的第二天"><a href="#这是学习MarkDown语法的第二天" class="headerlink" title="这是学习MarkDown语法的第二天"></a>这是学习MarkDown语法的第二天</h1><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>试试超链接吧<br/><a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>一下，你就知道，<a target="_blank" rel="noopener" href="https://zhihu.com/">知乎</a>是一个很好的网站。</p>
 
       
     </div>
@@ -229,7 +540,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/b2ac50d6.html">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/44641201.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -243,7 +554,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/article/b2ac50d6.html" class="post-title-link" itemprop="url">note of learning git</a>
+            <a href="/article/44641201.html" class="post-title-link" itemprop="url">hexo+git+nodejs+nginx+使用centos7的VPS搭建博客</a>
         </h2>
 
         <div class="post-meta">
@@ -253,14 +564,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-11 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-11T00:00:00+08:00">2020-03-11</time>
+              <time title="创建时间：2020-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-22T00:00:00+08:00">2020-02-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-20 11:37:12" itemprop="dateModified" datetime="2024-02-20T11:37:12+08:00">2024-02-20</time>
+                <time title="修改时间：2024-03-04 21:16:37" itemprop="dateModified" datetime="2024-03-04T21:16:37+08:00">2024-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +579,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
                 </span>
             </span>
 
@@ -283,25 +594,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h1><h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p>如果是在Windows下进行操作，首先使用选择或者新建一个文件夹（目录的路径最好没有中文），然后在cmd或者powershell中使用cd命令进入这个目录。使用<code>git init</code>命令初始化一个仓库。此时需要注意的是，文件夹的名称就是这个仓库的名称。</p>
-<h2 id="向仓库添加文件"><a href="#向仓库添加文件" class="headerlink" title="向仓库添加文件"></a>向仓库添加文件</h2><p>仓库创建好了之后，就可以在这个目录下面写东西了。需要注意的是，所有的版本控制系统只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化。不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的。所以我学习了markdown语法，使用Typora来编辑文本文件。</p>
-<p>使用typora编写好文本文件后，将文件保存为<code>.md</code>格式的文档。然后使用<code>git add xxxx.md</code>命令向仓库添加文件。<code>git add</code>命令的意思是将文件添加到git仓库中。这一点需要注意，如果需要git管理仓库中的文件，需要做两件事情：1.将文件添加到仓库目录里；2.使用<code>git add</code>命令添加文件。如果是在仓库目录中修改已有的文件，那么每次修改过后都需要使用<code>git add</code>命令添加一次该文件。</p>
-<p>修改文件后使用<code>git status</code>命令查看状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &#x27;origin/master&#x27;.</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   _posts/2020-03-11-note-of-learning-git.md</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+          <p>废话不说，直接上干货。</p>
+<h2 id="本机（个人电脑）上的操作（以win10-64位系统为例）"><a href="#本机（个人电脑）上的操作（以win10-64位系统为例）" class="headerlink" title="本机（个人电脑）上的操作（以win10 64位系统为例）"></a>本机（个人电脑）上的操作（以win10 64位系统为例）</h2><h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>在官网下载软件，一路默认安装即可。</p>
+<h3 id="安装Git-不要使用最新版本，2-10左右即可"><a href="#安装Git-不要使用最新版本，2-10左右即可" class="headerlink" title="安装Git(不要使用最新版本，2.10左右即可)"></a>安装Git(不要使用最新版本，2.10左右即可)</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>在<a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">淘宝镜像</a>上下载合适的版本，一路默认安装即可（在安装时记得勾选add to path）。</p>
+<h4 id="生成ssh密钥"><a href="#生成ssh密钥" class="headerlink" title="生成ssh密钥"></a>生成ssh密钥</h4><p>按下面的步骤进行：</p>
+<p>1.打开 <code>C:\Users\&lt;用户名&gt;\.ssh</code>文件夹，如果没有就新建<br>        2.在空白处单击右键，选择<code>Git Bash Here</code>打开终端<br>        3.设置git用户名<br/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line">git config --global user.name &quot;username&quot;</span><br></pre></td></tr></table></figure>
 
-<p>使用<code>git add xxxx.md</code>命令后再使用<code>git status</code>查看状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &#x27;origin/master&#x27;.</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   _posts/2020-03-11-note-of-learning-git.md</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h2><p>提交修改使用<code>git commit -m ‘xxxxxx’</code>命令；此次使用<code>git commit -m ‘添加note of learning git&#39;</code>命令提交修改，输出如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[master a990a74] 添加note of learning git</span><br><span class="line"> 1 file changed, 33 insertions(+), 1 deletion(-)</span><br></pre></td></tr></table></figure>
-
-<p>然后再使用<code>git status</code>命令查看状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">Your branch is ahead of &#x27;origin/master&#x27; by 2 commits.</span><br><span class="line">  (use &quot;git push&quot; to publish your local commits)</span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
-
-<h2 id="与远程仓库关联"><a href="#与远程仓库关联" class="headerlink" title="与远程仓库关联"></a>与远程仓库关联</h2><p>在github网站新建一个与本地仓库一样名字的仓库后，可以使用<code>git remote add origin git@github.com:xxxxxxxx/xxxxxx.git</code>将本地仓库与github网站上的远程仓库关联起来，此时，远程仓库的名字就是<code>origin</code>。随后，可以使用<code>git push -u origin master</code>命令将本地仓库的所有内容一次性推送到远程仓库里。以后有修改内容需要再次推送时，可以省略<code>-u</code>参数。</p>
-
+<p>4.生成ssh密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/article/44641201.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -319,7 +628,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 
@@ -449,7 +758,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">YaoWenchao</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         
