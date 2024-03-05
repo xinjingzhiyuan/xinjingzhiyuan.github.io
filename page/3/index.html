@@ -24,31 +24,28 @@
 
   <meta name="description" content="Learning And Living">
 <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://1100800824.github.io/tags/index.html">
+<meta property="og:title" content="淡泊明志，宁静致远">
+<meta property="og:url" content="http://1100800824.github.io/page/3/index.html">
 <meta property="og:site_name" content="淡泊明志，宁静致远">
 <meta property="og:description" content="Learning And Living">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-20T01:51:10.000Z">
-<meta property="article:modified_time" content="2024-02-20T01:53:46.000Z">
 <meta property="article:author" content="YaoWenchao">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://1100800824.github.io/tags/">
+<link rel="canonical" href="http://1100800824.github.io/page/3/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>tags | 淡泊明志，宁静致远
-</title>
+  <title>淡泊明志，宁静致远</title>
   
 
 
@@ -158,51 +155,104 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content index posts-expand">
             
-
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">tags
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://1100800824.github.io/article/44641201.html">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YaoWenchao">
+      <meta itemprop="description" content="Learning And Living">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="淡泊明志，宁静致远">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/article/44641201.html" class="post-title-link" itemprop="url">hexo+git+nodejs+nginx+使用centos7的VPS搭建博客</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-22T00:00:00+08:00">2020-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-04 21:16:37" itemprop="dateModified" datetime="2024-03-04T21:16:37+08:00">2024-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 17 个标签
+          <p>废话不说，直接上干货。</p>
+<h2 id="本机（个人电脑）上的操作（以win10-64位系统为例）"><a href="#本机（个人电脑）上的操作（以win10-64位系统为例）" class="headerlink" title="本机（个人电脑）上的操作（以win10 64位系统为例）"></a>本机（个人电脑）上的操作（以win10 64位系统为例）</h2><h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>在官网下载软件，一路默认安装即可。</p>
+<h3 id="安装Git-不要使用最新版本，2-10左右即可"><a href="#安装Git-不要使用最新版本，2-10左右即可" class="headerlink" title="安装Git(不要使用最新版本，2.10左右即可)"></a>安装Git(不要使用最新版本，2.10左右即可)</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>在<a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">淘宝镜像</a>上下载合适的版本，一路默认安装即可（在安装时记得勾选add to path）。</p>
+<h4 id="生成ssh密钥"><a href="#生成ssh密钥" class="headerlink" title="生成ssh密钥"></a>生成ssh密钥</h4><p>按下面的步骤进行：</p>
+<p>1.打开 <code>C:\Users\&lt;用户名&gt;\.ssh</code>文件夹，如果没有就新建<br>        2.在空白处单击右键，选择<code>Git Bash Here</code>打开终端<br>        3.设置git用户名<br/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br><span class="line">git config --global user.name &quot;username&quot;</span><br></pre></td></tr></table></figure>
+
+<p>4.生成ssh密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/article/44641201.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/jupyter/" style="font-size: 12px; color: #ccc">-jupyter</a> <a href="/tags/Android%E6%89%8B%E6%9C%BA-%E5%B9%B3%E6%9D%BF/" style="font-size: 21px; color: #6f6f6f">Android手机/平板</a> <a href="/tags/Centos/" style="font-size: 12px; color: #ccc">Centos</a> <a href="/tags/LinuxDeploy/" style="font-size: 12px; color: #ccc">LinuxDeploy</a> <a href="/tags/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 12px; color: #ccc">frp内网穿透</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 12px; color: #ccc">github</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/markdown/" style="font-size: 30px; color: #111">markdown</a> <a href="/tags/nginx/" style="font-size: 12px; color: #ccc">nginx</a> <a href="/tags/nodejs/" style="font-size: 12px; color: #ccc">nodejs</a> <a href="/tags/random-headers/" style="font-size: 12px; color: #ccc">random headers</a> <a href="/tags/regex/" style="font-size: 12px; color: #ccc">regex</a> <a href="/tags/spider/" style="font-size: 12px; color: #ccc">spider</a> <a href="/tags/web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 12px; color: #ccc">web服务器</a> <a href="/tags/windows/" style="font-size: 12px; color: #ccc">windows</a> <a href="/tags/xpath/" style="font-size: 12px; color: #ccc">xpath</a>
-            </div>
-          </div>
+          <!--/noindex-->
         
-      </div>
-      
-      
       
     </div>
-    
 
     
     
     
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
